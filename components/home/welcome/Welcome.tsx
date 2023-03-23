@@ -1,7 +1,8 @@
+import { useRouter } from "expo-router";
 import React from "react";
-import { Image, Text, TextInput, View } from "react-native";
+import { FlatList, Image, Text, TextInput, View } from "react-native";
 import { TouchableOpacity } from "react-native-gesture-handler";
-import { icons } from "../../../constants";
+import { icons, SIZES } from "../../../constants";
 
 import styles from "./welcome.style";
 
@@ -18,6 +19,8 @@ export default function Welcome() {
       </View>
       {/* search bar  */}
       <SearchBar />
+      {/* search tab  */}
+      <SearchJobTab />
     </View>
   );
 }
@@ -44,6 +47,37 @@ const SearchBar = () => {
           style={styles.searchBtnImage}
         />
       </TouchableOpacity>
+    </View>
+  );
+};
+
+const SearchJobTab = () => {
+  const router = useRouter();
+
+  const [activeJobType, setActiveJobType] = React.useState("Full Time");
+  const jobTypes = ["Full Time", "Part Time", "Freelance", "Internship"];
+
+  return (
+    <View style={styles.tabsContainer}>
+      <FlatList
+        data={jobTypes}
+        renderItem={({ item }) => (
+          <TouchableOpacity
+            // @ts-ignore
+            style={styles.tab(activeJobType, item)}
+            onPress={() => {
+              setActiveJobType(item);
+              router.push(`/search/${item}`);
+            }}
+          >
+            {/* @ts-ignore */}
+            <Text style={styles.tabText(activeJobType, item)}>{item}</Text>
+          </TouchableOpacity>
+        )}
+        horizontal
+        keyExtractor={item => item}
+        contentContainerStyle={{ columnGap: SIZES.small }}
+      />
     </View>
   );
 };
