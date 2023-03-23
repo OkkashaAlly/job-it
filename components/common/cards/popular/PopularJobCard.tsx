@@ -1,5 +1,6 @@
 import React from "react";
 import { Image, Text, TouchableOpacity, View } from "react-native";
+import { isValidImageUrl } from "../../../../utils";
 
 import styles from "./popularJobCard.style";
 
@@ -25,7 +26,11 @@ const PopularJobCard = ({
       style={styles.logoContainer(selectedJob, item)}
     >
       <Image
-        source={{ uri: item?.employer_logo }}
+        source={{
+          uri: isValidImageUrl(item.employer_logo)
+            ? item?.employer_logo
+            : "https://via.placeholder.com/150",
+        }}
         // @ts-ignore
         style={styles.logoImage}
         resizeMode="contain"
