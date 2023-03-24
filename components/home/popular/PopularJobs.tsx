@@ -10,17 +10,17 @@ import {
 import { COLORS, SIZES } from "../../../constants";
 import styles from "./popularJobs.style";
 
-import PopularJobCard from "../../common/cards/popular/PopularJobCard";
 import useFetch from "../../../hooks/useFetch";
+import PopularJobCard from "../../common/cards/popular/PopularJobCard"; 
 
 // ==================================================
 // POPULAR JOB: SECTION COMPONENT ===================
 // ==================================================
 export default function PopularJobs() {
-  const {data, loading, error} = useFetch('search', {
-    query: 'React developer',
+  const { data, loading, error } = useFetch("search", {
+    query: "React developer",
     num_pages: 1,
-  })
+  });
 
   // RETURN =========================================
   return (
@@ -42,7 +42,13 @@ export default function PopularJobs() {
           <FlatList
             data={data}
             keyExtractor={item => item?.job_id}
-            renderItem={({ item }) => <PopularJobCard item={item} />}
+            renderItem={({ item }) => (
+              <PopularJobCard
+                item={item}
+                selectedJob=""
+                handlePress={() => {}}
+              />
+            )}
             contentContainerStyle={{ columnGap: SIZES.medium }}
             horizontal
           />
