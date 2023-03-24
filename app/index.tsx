@@ -43,7 +43,7 @@ export default function App() {
       <ScrollView showsVerticalScrollIndicator={false}>
         <View style={{ flex: 1, padding: SIZES.medium }}>
           <Welcome />
-          <PopularJobs />
+          {/* <PopularJobs /> */}
           <NearbyJobs />
         </View>
       </ScrollView>
