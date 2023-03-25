@@ -13,7 +13,6 @@ export default function About({ info }: { info: string }) {
 
       <View style={styles.contentBox}>
         <Text style={styles.contextText}>{info}</Text>
-        
       </View>
     </View>
   );

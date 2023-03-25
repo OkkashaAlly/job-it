@@ -55,7 +55,7 @@ export default function JobDetailsPage() {
         return (
           <Specifics
             title="Responsibilities"
-            data={data.job_highlights?.qualifications ?? ["No data"]}
+            data={data.job_highlights?.Responsibilities ?? ["No data"]}
           />
         );
     }
