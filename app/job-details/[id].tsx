@@ -9,7 +9,13 @@ import {
   View,
 } from "react-native";
 
-import { Company, JobTabs, ScreenHeaderBtn, Specifics } from "../../components";
+import {
+  Company,
+  JobAbout,
+  JobTabs,
+  ScreenHeaderBtn,
+  Specifics,
+} from "../../components";
 import { COLORS, icons, SIZES } from "../../constants";
 import useFetch from "../../hooks/useFetch";
 
@@ -37,12 +43,7 @@ export default function JobDetailsPage() {
   const displayTabContent = (tab: string, data: any) => {
     switch (tab) {
       case "About":
-        return (
-          <Specifics
-            title="About"
-            data={data.job_highlights?.qualifications ?? ["No data"]}
-          />
-        );
+        return <JobAbout info={data.job_description ?? ["No data"]} />;
       case "Qualifications":
         return (
           <Specifics
