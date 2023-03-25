@@ -9,7 +9,7 @@ import {
   View,
 } from "react-native";
 
-import { Company, JobTabs, ScreenHeaderBtn } from "../../components";
+import { Company, JobTabs, ScreenHeaderBtn, Specifics } from "../../components";
 import { COLORS, icons, SIZES } from "../../constants";
 import useFetch from "../../hooks/useFetch";
 
@@ -32,6 +32,33 @@ export default function JobDetailsPage() {
   // job info tabs
   const tabs = ["About", "Qualifications", "Responsibilities"];
   const [activeTab, setActiveTab] = React.useState(tabs[0]);
+
+  // display tab content
+  const displayTabContent = (tab: string, data: any) => {
+    switch (tab) {
+      case "About":
+        return (
+          <Specifics
+            title="About"
+            data={data.job_highlights?.qualifications ?? ["No data"]}
+          />
+        );
+      case "Qualifications":
+        return (
+          <Specifics
+            title="Qualifications"
+            data={data.job_highlights?.Qualifications ?? ["No data"]}
+          />
+        );
+      case "Responsibilities":
+        return (
+          <Specifics
+            title="Responsibilities"
+            data={data.job_highlights?.qualifications ?? ["No data"]}
+          />
+        );
+    }
+  };
 
   // RETURN =========================================
   return (
@@ -88,6 +115,9 @@ export default function JobDetailsPage() {
               activeTab={activeTab}
               setActiveTab={setActiveTab}
             />
+
+            {/* dispay tab content  */}
+            {displayTabContent(activeTab, data![0])}
           </View>
         )}
       </ScrollView>
