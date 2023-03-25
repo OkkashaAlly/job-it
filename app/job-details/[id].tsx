@@ -25,9 +25,13 @@ export default function JobDetailsPage() {
     job_id: param.id,
   });
 
+  // page refresh
   const [refreshing, setRefreshing] = React.useState(false);
-
   const onRefresh = React.useCallback(() => {}, []);
+
+  // job info tabs
+  const tabs = ["About", "Qualifications", "Responsibilities"];
+  const [activeTab, setActiveTab] = React.useState(tabs[0]);
 
   // RETURN =========================================
   return (
@@ -71,13 +75,19 @@ export default function JobDetailsPage() {
           <Text>No data</Text>
         ) : (
           <View style={{ padding: SIZES.medium, paddingBottom: 100 }}>
+            {/* company info  */}
             <Company
               companyLogo={data![0].employer_logo}
               jobTitle={data![0].job_title}
               companyName={data![0].employer_name}
               companyLocation={data![0].job_country}
             />
-            <JobTabs />
+            {/* job info  */}
+            <JobTabs
+              tabs={tabs}
+              activeTab={activeTab}
+              setActiveTab={setActiveTab}
+            />
           </View>
         )}
       </ScrollView>
