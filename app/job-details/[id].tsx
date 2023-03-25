@@ -12,6 +12,7 @@ import {
 import {
   Company,
   JobAbout,
+  JobFooter,
   JobTabs,
   ScreenHeaderBtn,
   Specifics,
@@ -117,11 +118,15 @@ export default function JobDetailsPage() {
               setActiveTab={setActiveTab}
             />
 
-            {/* dispay tab content  */}
+            {/* display tab content  */}
             {displayTabContent(activeTab, data![0])}
           </View>
         )}
       </ScrollView>
+
+      {/* footer  */}
+
+      <JobFooter data={data! ?? ""} />
     </SafeAreaView>
   );
 }

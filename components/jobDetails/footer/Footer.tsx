@@ -1,14 +1,33 @@
-import React from 'react'
-import { View, Text } from 'react-native'
+import React from "react";
+import { Image, Linking, Text, TouchableOpacity, View } from "react-native";
+import { icons } from "../../../constants";
 
-import styles from './footer.style'
+import styles from "./footer.style";
 
-const Footer = () => {
+// ==========================================================
+// FOOTER COMPONENT =========================================
+// ==========================================================
+export default function Footer({ data }: { data: any[] | string }) {
+  const url = data[0]?.job_google_link
+
   return (
-    <View>
-      <Text>Footer</Text>
-    </View>
-  )
-}
+    <View style={styles.container}>
+      {/* bookmark/like/save job btn */}
+      <TouchableOpacity style={styles.likeBtn}>
+        <Image
+          source={icons.heartOutline}
+          style={styles.likeBtnImage}
+          resizeMode="contain"
+        />
+      </TouchableOpacity>
 
-export default Footer
+      {/* apply btn  */}
+      <TouchableOpacity
+        style={styles.applyBtn}
+        onPress={() => Linking.openURL(url)}
+      >
+        <Text style={styles.applyBtnText}>Apply now</Text>
+      </TouchableOpacity>
+    </View>
+  );
+}
