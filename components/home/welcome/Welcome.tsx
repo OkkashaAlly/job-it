@@ -9,7 +9,15 @@ import styles from "./welcome.style";
 // =============================================================
 // WELCOME: SECTION COMPONENT ==================================
 // =============================================================
-export default function Welcome() {
+export default function Welcome({
+  searchText,
+  setSearchText,
+  handleSearch,
+}: {
+  searchText: string;
+  setSearchText: React.Dispatch<React.SetStateAction<string>>;
+  handleSearch: () => void;
+}) {
   return (
     <View>
       {/* top  */}
@@ -18,7 +26,11 @@ export default function Welcome() {
         <Text style={styles.welcomeMessage}>Find Your Perfect Job</Text>
       </View>
       {/* search bar  */}
-      <SearchBar />
+      <SearchBar
+        searchText={searchText}
+        setSearchText={setSearchText}
+        handleSearch={handleSearch}
+      />
       {/* search tab  */}
       <SearchJobTab />
     </View>
@@ -26,20 +38,28 @@ export default function Welcome() {
 }
 
 // EXTENDED COMPONENT ///////////////////////////////
-const SearchBar = () => {
+const SearchBar = ({
+  searchText,
+  setSearchText,
+  handleSearch,
+}: {
+  searchText: string;
+  setSearchText: React.Dispatch<React.SetStateAction<string>>;
+  handleSearch: () => void;
+}) => {
   return (
     <View style={styles.searchContainer}>
       {/* input  */}
       <View style={styles.searchWrapper}>
         <TextInput
           style={styles.searchInput}
-          value=""
+          value={searchText}
           placeholder="What are you looking for?"
-          onChangeText={() => {}}
+          onChangeText={text => setSearchText(text)}
         />
       </View>
       {/* button  */}
-      <TouchableOpacity style={styles.searchBtn}>
+      <TouchableOpacity style={styles.searchBtn} onPress={handleSearch}>
         <Image
           source={icons.search}
           resizeMode="contain"

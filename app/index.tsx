@@ -13,6 +13,8 @@ import { COLORS, icons, images, SIZES } from "../constants";
 export default function App() {
   const router = useRouter();
 
+  const [searchText, setSearchText] = React.useState<string>("");
+
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: COLORS.lightWhite }}>
       {/* header  */}
@@ -42,7 +44,16 @@ export default function App() {
       {/* body  */}
       <ScrollView showsVerticalScrollIndicator={false}>
         <View style={{ flex: 1, padding: SIZES.medium }}>
-          <Welcome />
+          <Welcome
+            searchText={searchText}
+            setSearchText={setSearchText}
+            handleSearch={() => {
+              if (searchText.length > 0) {
+                router.push(`/search/${searchText}`);
+              }
+
+            }}
+           />
           {/* <PopularJobs /> */}
           <NearbyJobs />
         </View>
